@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->decimal('cost_price',7,2);
             $table->decimal('sale_price',7,2);
-            $table->integer('subcategory_id');
+            $table->integer('subcategorie_id');
             $table->timestamps();
         });
     }
