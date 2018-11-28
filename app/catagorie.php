@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class catagorie extends Model
 {
     public function subcatagorie()
     {
-        return $this->hasOne('App\subcatagorie');
+        return $this->hasMany('App/subcatagorie');
     }
 }
