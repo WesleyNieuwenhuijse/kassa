@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class catagorie extends Model
 {
     protected $fillable = ['id', 'name'];
 
-    public function Invoice()
+    public function subcatagorie()
     {
-        return $this->hasOne('App\Invoice');
+        return $this->hasMany('App/subcatagorie');
     }
 }
