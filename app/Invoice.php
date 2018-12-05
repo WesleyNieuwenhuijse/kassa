@@ -8,8 +8,8 @@ class Invoice extends Model
 {
     protected $fillable = ['id', 'paid', 'customer_id'];
 
-    public function product_invoice_line()
+    public function ProductInvoiceLine()
     {
-        return $this->hasMany('App\product_invoice_line');
+        return $this->hasMany('App\ProductInvoiceLine');
     }
 }

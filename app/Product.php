@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = ['id', 'name', 'cost_price', 'sale_price', 'subcategorie_id'];
-
-    public static function create(array $array, array $array1, array $array2)
+    public function SubCatagorie()
     {
+        return $this->hasOne('App\SubCatagorie');
     }
-
-    public function subcatagorie()
+    public function ProductInvoiceLine()
     {
-        return $this->hasOne('App\subcatagorie');
+        return $this->hasMany('App\ProductInvoiceLine');
     }
 }
