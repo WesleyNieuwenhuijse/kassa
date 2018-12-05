@@ -14,7 +14,9 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        return view('layouts.category.index',with('categories'));
+
     }
 
     /**
@@ -24,7 +26,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.category.create');
     }
 
     /**
@@ -35,7 +37,8 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Categorie::create($request->all());
+        return redirect(URL::asset('/categories'));
     }
 
     /**
