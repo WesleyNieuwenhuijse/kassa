@@ -15,7 +15,7 @@ class CategorieController extends Controller
     public function index()
     {
         $categories = Categorie::all();
-        return view('layouts.category.index',with('categories'));
+        return view('category.show',with('categories'));
 
     }
 
@@ -26,7 +26,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        return view('layouts.category.create');
+        return view('category.index');
     }
 
     /**
