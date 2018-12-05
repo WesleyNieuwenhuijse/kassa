@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class subcatagorie extends Model
+class SubCategorie extends Model
 {
     public $fillable = ['id', 'name', 'categorie_id'];
 
-    public function catagorie()
+    public function Catagorie()
     {
-        return $this->hasOne('App\catagorie');
+        return $this->hasOne('App\Catagorie');
     }
 }
