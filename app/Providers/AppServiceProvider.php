@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         Builder::defaultStringLength('75');
     }
 
+
     /**
      * Register any application services.
      *
