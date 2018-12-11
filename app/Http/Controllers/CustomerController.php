@@ -36,8 +36,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Customer::create($request->all);
-        return redirect()->route('customer');
+        Customer::create($request->all());
+        return redirect()->action('CustomerController@index');
     }
 
     /**
@@ -48,7 +48,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customer.show',compact('customer'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+
     }
 
     /**
@@ -82,6 +82,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+
     }
 }

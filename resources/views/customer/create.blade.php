@@ -1,7 +1,7 @@
 
 @extends('layouts.masterlayout')
 @section('content')
-    {!! Form::open(['url' => 'customer', 'action' => 'CustomerController@store' ,'method' => 'POST']) !!}
+    {!! Form::open(['url' => 'customer','method' => 'POST']) !!}
 
     {{ csrf_field() }}
 
