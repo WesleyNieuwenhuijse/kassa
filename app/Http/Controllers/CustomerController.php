@@ -15,7 +15,6 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Customer::all();
-
         return view('customer.index',compact('customer'));
     }
 
@@ -37,7 +36,6 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
         Customer::create($request->all);
         return redirect()->route('customer');
     }
