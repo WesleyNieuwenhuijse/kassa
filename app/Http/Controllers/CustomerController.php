@@ -26,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-        Customer::new($request->all);
+        Customer::create($request->all);
         return redirect()->route('customer');
     }
 
