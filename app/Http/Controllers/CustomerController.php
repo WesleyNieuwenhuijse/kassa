@@ -62,8 +62,12 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer1)
     {
+        $customer = DB::table('customers')
+            ->join('invoices','customers.invoice_id','=','invoices.id')
+            ->where('customers.id','=',$customer1->id)
+            ->select('customers.*','invoices.paid')->get();
         return view('customer.show',compact('customer'));
     }
 
@@ -75,7 +79,11 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-
+//        $customer = DB::table('customers')
+//            ->join('invoices','customers.invoice_id','=','invoices.id')
+//            ->where('customers.id','=',$customer1->id)
+//            ->select('customers.*','invoices.paid')->get();
+        return view('customer.update',compact('customer'));
     }
 
     /**
@@ -87,7 +95,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        DB::table('customers')
+            ->join('invoices','costumers.invoice_id','=','invoices.id')
+            ->where('costumers.id','=',$customer->id)
+            ->update(['costumers.name'=>$request->name,
+                'invoices.paid'=>$request->paid]);
+        return redirect()->action('CustomerController@index');
     }
 
     /**
@@ -98,6 +111,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        
+        Invoice::destroy("$customer->id");
+        $customer->delete();
+        return redirect()->action('CustomerController@index');
     }
 }
