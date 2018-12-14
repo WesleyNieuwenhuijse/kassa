@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -14,7 +16,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer = Customer::all();
+        $customer = DB::table('customers')
+            ->join('invoices','customers.invoice_id','=','invoices.id')
+            ->select('customers.*','invoices.paid')->get();
+//        $invoice = Invoice::all();
         return view('customer.index',compact('customer'));
     }
 
@@ -36,7 +41,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Customer::create($request->all());
+        //maak een rekening aan als klant gelijk rekening opent op naam
+        $invoice = new Invoice;
+        $invoice->paid = false;
+        $invoice->save();
+
+        //maak klant aan en voeg gelijk de rekening toe
+        $customer = new Customer;
+        $customer->name = $request->name;
+        $customer->invoice_id = $invoice->id;
+        $customer->save();
+
+        //redirect terug naar de index pagina
         return redirect()->action('CustomerController@index');
     }
 
@@ -82,6 +98,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-
+        
     }
 }
