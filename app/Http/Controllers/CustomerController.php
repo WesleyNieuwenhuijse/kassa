@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -14,7 +16,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customer.index');
+        $customer = DB::table('customers')
+            ->join('invoices','customers.invoice_id','=','invoices.id')
+            ->select('customers.*','invoices.paid')->get();
+//        $invoice = Invoice::all();
+        return view('customer.index',compact('customer'));
     }
 
     /**
@@ -24,7 +30,6 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
         return view('customer.create');
     }
 
@@ -36,9 +41,19 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        //maak een rekening aan als klant gelijk rekening opent op naam
+        $invoice = new Invoice;
+        $invoice->paid = false;
+        $invoice->save();
 
-        Customer::new($request->all);
-        return redirect()->route('customer');
+        //maak klant aan en voeg gelijk de rekening toe
+        $customer = new Customer;
+        $customer->name = $request->name;
+        $customer->invoice_id = $invoice->id;
+        $customer->save();
+
+        //redirect terug naar de index pagina
+        return redirect()->action('CustomerController@index');
     }
 
     /**
@@ -47,9 +62,13 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer1)
     {
-        //
+        $customer = DB::table('customers')
+            ->join('invoices','customers.invoice_id','=','invoices.id')
+            ->where('customers.id','=',$customer1->id)
+            ->select('customers.*','invoices.paid')->get();
+        return view('customer.show',compact('customer'));
     }
 
     /**
@@ -60,7 +79,11 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+//        $customer = DB::table('customers')
+//            ->join('invoices','customers.invoice_id','=','invoices.id')
+//            ->where('customers.id','=',$customer1->id)
+//            ->select('customers.*','invoices.paid')->get();
+        return view('customer.update',compact('customer'));
     }
 
     /**
@@ -72,7 +95,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        DB::table('customers')
+            ->join('invoices','costumers.invoice_id','=','invoices.id')
+            ->where('costumers.id','=',$customer->id)
+            ->update(['costumers.name'=>$request->name,
+                'invoices.paid'=>$request->paid]);
+        return redirect()->action('CustomerController@index');
     }
 
     /**
@@ -83,6 +111,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        Invoice::destroy("$customer->id");
+        $customer->delete();
+        return redirect()->action('CustomerController@index');
     }
 }

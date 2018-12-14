@@ -1,3 +1,4 @@
+@extends('layouts.masterlayout')
 @section('content')
 {!! Form::open(['url' => 'category', 'method' => 'POST']) !!}
 {!! Form::token() !!}

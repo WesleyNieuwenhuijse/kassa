@@ -22,3 +22,4 @@ Route::resource('/category','CategorieController');
 Route::resource('/subcategory','SubCategorieController');
 Route::resource('/product','ProductController');
 Route::resource('/customer','CustomerController');
+Route::resource('/invoice','InvoiceController');
