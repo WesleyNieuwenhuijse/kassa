@@ -10,7 +10,7 @@
 <body>
 <h1>Categories</h1>
 
-<table class="Categorie" border="1px">
+<table class="Categorie" border="1px" style="float: left">
     <tr>
         <th>Categorie naam</th>
     </tr>
@@ -20,7 +20,7 @@
         </tr>
     @endforeach
 </table>
-<table class="SubCategorie" border="1px">
+<table class="SubCategorie" border="1px" >
     <tr>
         <th>Subcategorie naam</th>
     </tr>
@@ -30,7 +30,8 @@
         </tr>
     @endforeach
 </table>
-
+<button onclick="window.location='{{ route('category.create') }}'">Create Category</button>
+<button onclick="window.location='{{ route('subcategory.create') }}'">Create Subcategory</button>
 
 </body>
 </html>

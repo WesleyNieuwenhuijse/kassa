@@ -24,7 +24,7 @@ class SubCategorieController extends Controller
      */
     public function create()
     {
-        //
+        return view('subcategory.create');
     }
 
     /**
@@ -35,7 +35,10 @@ class SubCategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newSubCategory = new SubCategorie();
+        $newSubCategory->name= $request['name'];
+        $newSubCategory->save();
+        return redirect('subcategory');
     }
 
     /**

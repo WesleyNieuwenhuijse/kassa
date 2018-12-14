@@ -1,5 +1,5 @@
 @section('content')
-{!! Form::open(['url' => 'categories', 'method' => 'POST']) !!}
+{!! Form::open(['url' => 'category', 'method' => 'POST']) !!}
 {!! Form::token() !!}
     <div class="form">
         {!! Form::label('name','category name:') !!}
@@ -9,3 +9,5 @@
     </div>
 
 @endsection
+
+@yield('content')

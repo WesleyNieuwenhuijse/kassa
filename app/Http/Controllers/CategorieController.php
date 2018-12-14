@@ -28,7 +28,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        return view('category.index');
+        return view('category.create');
     }
 
     /**
@@ -39,8 +39,10 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        Categorie::create($request->all());
-        return redirect(URL::asset('/categories'));
+        $newCategory = new Categorie();
+        $newCategory->name= $request['name'];
+        $newCategory->save();
+        return redirect('category');
     }
 
     /**
