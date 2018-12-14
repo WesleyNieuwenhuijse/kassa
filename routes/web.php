@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/category','CategorieController');
 Route::resource('/subcategory','SubCategorieController');
-Route::resource('/products','ProductController');
+Route::resource('/product','ProductController');
+Route::resource('/customer','CustomerController');
+Route::resource('/invoice','InvoiceController');
