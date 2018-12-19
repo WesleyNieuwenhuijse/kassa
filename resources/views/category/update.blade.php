@@ -1,7 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Wesley
- * Date: 05-Dec-18
- * Time: 1:29 PM
- */
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>Edit Categorie - Categorie Naam </h1>
+    <p class="lead">Wijzig deze categorie. <a href="{{ route('category.index') }}">Ga terug naar alle categorieën.</a></p>
+    <hr>
+
+@stop

@@ -1,4 +1,5 @@
 @extends('layouts.masterlayout')
+@section('title', 'Create Category')
 @section('content')
 {!! Form::open(['url' => 'category', 'method' => 'POST']) !!}
 {!! Form::token() !!}
@@ -11,4 +12,3 @@
 
 @endsection
 
-@yield('content')

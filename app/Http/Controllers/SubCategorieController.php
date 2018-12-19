@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Categorie;
 use App\SubCategorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubCategorieController extends Controller
 {
@@ -24,7 +26,9 @@ class SubCategorieController extends Controller
      */
     public function create()
     {
-        return view('subcategory.create');
+        $allCategory = Categorie::all()->pluck('name', 'id');
+
+        return view('subcategory.create', compact('allCategory'));
     }
 
     /**
@@ -35,7 +39,9 @@ class SubCategorieController extends Controller
      */
     public function store(Request $request)
     {
+        $lastId = DB::table('subcategories')->pluck('id')->last();
         $newSubCategory = new SubCategorie();
+        $newSubCategory->id = $lastId +1;
         $newSubCategory->name= $request['name'];
         $newSubCategory->save();
         return redirect('subcategory');

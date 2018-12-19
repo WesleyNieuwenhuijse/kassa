@@ -30,8 +30,11 @@
         </tr>
     @endforeach
 </table>
+
 <button onclick="window.location='{{ route('category.create') }}'">Create Category</button>
 <button onclick="window.location='{{ route('subcategory.create') }}'">Create Subcategory</button>
-
+@foreach($categories AS $cts)
+<button onclick="window.location='{{ route('category.update', $cts->name) }}'">Wijzig {{ $cts->name }}</button>
+@endforeach
 </body>
 </html>

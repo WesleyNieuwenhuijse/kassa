@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Categorie;
 use App\SubCategorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategorieController extends Controller
 {
@@ -39,10 +40,12 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
+        $lastId = DB::table('categories')->pluck('id')->last();
         $newCategory = new Categorie();
+        $newCategory->id = $lastId +1;
         $newCategory->name= $request['name'];
         $newCategory->save();
-        return redirect('category');
+        return redirect()->action('CategorieController@index');
     }
 
     /**
@@ -64,7 +67,7 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        //
+        return view('category.update');
     }
 
     /**
