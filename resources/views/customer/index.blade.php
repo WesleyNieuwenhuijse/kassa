@@ -22,14 +22,28 @@ icon naar create klant
         @endif
 
         <td>
-            <a href="{{action('CustomerController@show',array($c->id))}}"><i class="far fa-file"></i></a>
-            <a href="{{action('CustomerController@edit',array($c->id))}}"><i class="fas fa-pencil-alt"></i></a>
-            {!! Form::open(['url' => 'customer/'.$c->id,'method' => 'POST']) !!}
-            {{ csrf_field() }}
-            {{method_field('DELETE')}}
-            {!! Form::submit() !!}
-            {!! Form::close() !!}
-            <a href="{{action('CustomerController@destroy',array($c->id))}}"><i class="fas fa-trash-alt"></i></a>
+            <div class="table-icon">
+                <button type="submit" onclick="return location.replace(window.location.href + '/1'); " style="border: 0; background: none;">
+                    <i class="far fa-file" aria-hidden="true"></i>
+                </button>
+            </div>
+            {{--<a href="{{action('CustomerController@show',array($c->id))}}"><i class="far fa-file"></i></a>--}}
+            <div class="table-icon">
+                <button type="submit" onclick="return location.replace(window.location.href + '/1/edit'); " style="border: 0; background: none;">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                </button>
+            </div>
+            {{--<a href="{{action('CustomerController@edit',array($c->id))}}"><i class="fas fa-pencil-alt"></i></a>--}}
+            <div class="table-icon">
+                {!! Form::open(['url' => 'customer/'.$c->id,'method' => 'POST']) !!}
+                {{ csrf_field() }}
+                {{method_field('DELETE')}}
+                <button type="submit" onclick="return confirm('Are you sure to delete this course ?');" style="border: 0; background: none;">
+                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                </button>
+                {!! Form::close() !!}
+            </div>
+            {{--<a href="{{action('CustomerController@destroy',array($c->id))}}"><i class="fas fa-trash-alt"></i></a>--}}
         </td>
     </tr>
     @endforeach

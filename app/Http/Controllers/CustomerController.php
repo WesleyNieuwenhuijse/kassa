@@ -96,10 +96,12 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         DB::table('customers')
-            ->join('invoices','costumers.invoice_id','=','invoices.id')
-            ->where('costumers.id','=',$customer->id)
-            ->update(['costumers.name'=>$request->name,
-                'invoices.paid'=>$request->paid]);
+            ->where('id', '=', $customer->id )
+            ->update(['name' => $request->name]);
+        DB::table('invoices')
+            ->where('id', '=', $customer->invoice_id)
+            ->update(['paid' => $request->paid]);
+
         return redirect()->action('CustomerController@index');
     }
 
