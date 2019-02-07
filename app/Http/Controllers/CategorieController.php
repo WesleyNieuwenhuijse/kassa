@@ -67,7 +67,7 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        return view('category.update');
+        return view('category.update',compact('categorie'));
     }
 
     /**
@@ -79,7 +79,15 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        //
+//        $request->validate([
+//            'name' => 'required',
+//            'detail' => 'required',
+//        ]);
+
+        $categorie->update($request->all());
+
+        return redirect()->route('category.update')
+            ->with('success','Category updated successfully');
     }
 
     /**
